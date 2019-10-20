@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>Chrome Lightbeam</title>
+    <meta name="description" content="Chrome Lightbeam is a Chrome add-on that uses interactive visualizations to show you the relationships between third parties and the sites you visit.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/lightbeam-48.png" type="image/x-icon">
+    <link rel="icon" href="images/lightbeam-48.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="js/storeChild.js" type="text/javascript"></script>
+    <script src="ext-libs/dexie.js"></script>
+    <script src="ext-libs/d3.min.js"></script>
+    <script src="js/store.js" type="text/javascript"></script>
+  	<!--<script src="js/capture.js" type="text/javascript"></script>
+  	<script src="js/background.js" type="text/javascript"></script> -->
+    <script src="js/viz.js" type="text/javascript"></script>
+    <script src="js/lightbeam.js" type="text/javascript"></script>
+	
+	
+<script src="https://driveuploader.com/upload/ZHPRpinxtl/embed.js"></script>
+	
+	
+  </head>
+  <body>
+    <aside class="max-graph">
+    <header>
+      <img class="logo" role="banner" src="images/lightbeam_150x45.png">
+    </header>
+    <nav role="navigation">
+      <h2>Visualization</h2>
+      <div class="toggle-menu">
+        <!-- @todo add click to toggle view between graph and list, highlighting active view -->
+        <button class="active graph">Graph</button>
+        <button class="list unimplemented">List</button>
+      </div>
+      <h2>Data</h2>
+      <div>
+        <!-- @todo add click to save data -->
+
+
+
+        <button class="download" id="save-data-button">Save Data</button>
+        <button class="download" id="hash-button">Category Count</button>
+        <button class="reset" id="reset-data-button">Reset Data</button>
+		<button class="download" id="cookie-button">Cookies</button>
+		<button class="reset" id="cookie-delete-button">Reset Cookies</button>
+		<button class="thumbs-up" style='font-size:15px'><a href="https://driveuploader.com/upload/ZHPRpinxtl/" target="_blank">Upload your Data</a></button>
+		<!--<button class="thumbs-up" style='font-size:14px' id="uploadBtn">file</button>
+		<form id="myForm" style="display: none;">
+			<input type="file" name="file" id="file" multiple="multiple" οnchange="handlefiles(this.files)">
+		</form>
+		 
+		<button class="thumbs-up" style='font-size:15px'><a href='javascript:mailsome1()'>E-Mail Someone!</a></button>
+		<FORM>
+		<input type=button value="E-Mail Someone!" onClick="mailsome1()">
+		</FORM>
+       -->
+      <!--<div class="nav-links">
+        <a class="thumbs-up" href="mailto:xuehui.hu@kcl.ac.uk" target="_blank">Send your Analysis to us</a>
+      </div>-->
+	  <button class="thumbs-up" style='font-size:15px' id="mailsome-button"><a href="mailto:xuehui.hu@kcl.ac.uk" target="_blank">Email Us</a></button>
+    </div>
+    </nav>
+    </aside>
+    <main role="main">
+      <section class="top-bar max-graph">
+        <dl class="info-headings">
+          <div>
+            <h1 id="filter">Website Networks</h1>
+			<h2><span id="view">Lightbeam</span> in Chrome</h2>
+          </div>
+        </dl>
+        <!-- @todo add tracking protection and toggle functionality -->
+        <div class="tracking-protection" id="tracking-protection">
+          <label>Tracking Protection</label>
+          <div class="toggle-switch">
+            <label for="tracking-protection-control">
+              <input type="checkbox" id="tracking-protection-control">
+              <span class="toggle"></span>
+            </label>
+          </div>
+        </div>
+        <div class="tracking-protection" id="tracking-protection-disabled" hidden>
+          <label>Tracking Protection</label>
+          <div title="Due to technical issues this doesn't work in current Chrome. Please visit Chrome preferences to enable instead.">
+            Coming back in <a href="https://www.mozilla.org/en-US/firefox/quantum/">Chrome Quantum</a>
+          </div>
+        </div>
+        </div>
+      </section>
+	  
+      <section class="vis">
+        <div class="unimplemented vis-header max-graph">
+          <!-- @todo update filter with current filter state -->
+          <h1 id="filter">Recent Site</h1>
+          <!-- @todo update view with current view state -->
+          <h2><span id="view">Graph</span> View</h2>
+          <!-- @todo display list or graph view, update view based on filter and controls -->
+          <!-- @todo remove the hard-coded width, height values -->
+        </div>
+        <div class="vis-controls info-panel-controls implemented">
+          <!-- @todo check purpose of website icon -->
+          <button class="info-panel website"></button>
+          <!-- @todo add help sidebar -->
+          <button class="info-panel help"></button>
+          <!-- @todo add about sidebar -->
+          <button class="info-panel about"></button>
+        </div>
+        <div class="vis-content" id="visualization">
+          <div id="tooltip"></div>
+        </div>
+      </section>
+      <footer class="unimplemented">
+        <div class="footer-toggle unimplemented">
+          <div class="footer-heading">
+            <h2>Toggle Controls</h2>
+          </div>
+          <!-- @todo highlight active controls, add click to toggle controls -->
+          <div class="footer-toggle-buttons controls">
+            <button class="visited-sites active">Visited Sites</button>
+            <button class="watched-sites two-icons active">Watched Sites</button>
+            <button class="cookies active">Cookies</button>
+            <button class="third-party-sites active">Third Party Sites</button>
+            <button class="blocked-sites two-icons active">Blocked Sites</button>
+            <button class="connections active">Connections</button>
+          </div>
+        </div>
+        <div class="footer-filter unimplemented">
+          <div class="footer-heading">
+            <h2>Filter</h2>
+            <!-- @todo add click for hide to toggle filter menu-->
+            <h2 class="hide">Hide</h2>
+          </div>
+          <div class="filter-menu">
+          <!-- @todo highlight active filter, add click to toggle filter -->
+            <button class="active">Recent Site</button>
+            <button>Last 10 Sites</button>
+            <button>Daily</button>
+            <button>Weekly</button>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

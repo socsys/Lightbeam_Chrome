@@ -1,0 +1,177 @@
+Manifest-Version: 1.0
+
+Name: first-run.html
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: bTBwm1czHPwaMT7bYme6Og==
+SHA1-Digest: T7dbS3LJUEGUfyG3wsQc1SJqkok=
+
+Name: index.html
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: WhS/kqSs/sDPRqX+l4ri1Q==
+SHA1-Digest: xfd92mCXkEzfNg4gWVLQNDefKYM=
+
+Name: manifest.json
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: hpQWlUyVAMHeT0aD3ubLxw==
+SHA1-Digest: rH9LpzT9hGrRkoi/Chwu4bGk38I=
+
+Name: css/first-run.css
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: zmCtjpFRSYmIr0Px2g+LrA==
+SHA1-Digest: m1ViHwPiPmXiNkhDxFAb8WCcXEk=
+
+Name: css/OpenSans.css
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 1PfyMq9aRX0pxuyOkUN1pw==
+SHA1-Digest: QAVb87o5jUl+10+Th56gXsqHxLc=
+
+Name: css/style.css
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: OCBaHBhO0sOzweh0Cil04g==
+SHA1-Digest: HorXm6EVwre68CPSiivr7BXrieE=
+
+Name: ext-libs/d3.min.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: h6T+F+ZYUDYuaVdWCnCHRg==
+SHA1-Digest: 1bD7i6vEtMQjT8ilBj7j9GoWA8Y=
+
+Name: ext-libs/dexie.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: cCHmRAwOs8p9B+XV7JLRbw==
+SHA1-Digest: ywZ8/M5RrfL1SK2cO5939QMLNcg=
+
+Name: ext-libs/disconnect-entitylist.json
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: HO1qqRmthMOXO5KV2NXFIw==
+SHA1-Digest: dmf77PcKPv9WIYpQvinbN39M95M=
+
+Name: fonts/OpenSans-Bold.ttf
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 9TMctjcrbA2Lry3X4gBJjA==
+SHA1-Digest: g4fU+OBhwmTcOuvr5gaLZuRdfG8=
+
+Name: fonts/OpenSans-Light.ttf
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: n/EvaU5ZUab1Gp1jsFBi5w==
+SHA1-Digest: sIy1h7mjbj/4U3W5kL8J+LQN7GM=
+
+Name: fonts/OpenSans-LightItalic.ttf
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: VLRENAQRXO9K92VZbM8O0w==
+SHA1-Digest: xgceF2v14ZTpGdM80f2RReh7DJ4=
+
+Name: fonts/OpenSans-Regular.ttf
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 19XUWIqfUMmSZLwS5IkqfA==
+SHA1-Digest: UTlm4mC7dhDUeyMp26GUFDgxiT4=
+
+Name: images/defaultFavicon.svg
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 5MzrTDXOdQ/xn8dECnONkQ==
+SHA1-Digest: hLcDJ9QjkFb9kycTMvZNic3yF7M=
+
+Name: images/lightbeam-48.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: SPpgjPGcjDIIhy+daFvPUw==
+SHA1-Digest: 730gj5T7dEse5O5HXx12HGh/w4k=
+
+Name: images/lightbeam-96.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: yvYQRnSBzNYDpQSMBQy7Ng==
+SHA1-Digest: 2YLi0cYAHf7wiA4N4f2XDPcDzTQ=
+
+Name: images/lightbeam-icon-charcoal.svg
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: QXUn2Uza3ndW4CBQHW1Yjg==
+SHA1-Digest: fa14/joLAwDW11/DWcP/5rFQeVM=
+
+Name: images/lightbeam-icon.svg
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: amTlNkxU+xleZj7hPGqfBg==
+SHA1-Digest: rdg+YshJLRojgRqL44bJfPPrp7E=
+
+Name: images/lightbeam_150x45.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: KzSEm01NWAaDZPHsiv4FZA==
+SHA1-Digest: /zkDSlSkMA7kqC6/HOnUoQGw+J4=
+
+Name: images/lightbeam_icon_about.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: cn4kQDxBangO/x5nWZNh+g==
+SHA1-Digest: ASvXROHWMEbpk1jFZrs6CtqWQkM=
+
+Name: images/lightbeam_icon_download.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: UedcbaApavtzPK5Po6uYDQ==
+SHA1-Digest: NwfqF6oGJJUAflxJZkRveKnVEn8=
+
+Name: images/lightbeam_icon_feedback.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: deIqVoERHtxmtkjRIjWLyA==
+SHA1-Digest: IMlkiSSDj+tQx5QahAlv3U4fwKo=
+
+Name: images/lightbeam_icon_graph.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 1yslXnx774SYaa55jpE0+Q==
+SHA1-Digest: BjfYHGpQfnPmUbe16pSyxseJ6mQ=
+
+Name: images/lightbeam_icon_help.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: l5apgR8yYSJsVNNMidz9/g==
+SHA1-Digest: gl40eGgclW7mpa37qlitZqwncvI=
+
+Name: images/lightbeam_icon_list.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: SqX8Ero+fHJp7qk/snXPEQ==
+SHA1-Digest: O/lEn9ayt7o1lhQ24Xo8Ww0Bks4=
+
+Name: images/lightbeam_icon_reset.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: U5KIS46dVWBRPNUcEXaKOg==
+SHA1-Digest: vqJFWkYisnWc2CKRZC6W/7AqFOk=
+
+Name: images/lightbeam_icon_website.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: knssW35KUQsNBKyRDXJhnA==
+SHA1-Digest: x+GRGSrFXvB6+w8QEhGatpa5pBc=
+
+Name: images/lightbeam_logo-only_16x16.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: hLpc4bHT9VxSj9N/0+T3Yg==
+SHA1-Digest: HUOKVZADwrDp2Redh8lFLMOzNd0=
+
+Name: images/lightbeam_logo-wordmark_300x150.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 29a3D/GUjR5N+i09QjaNVg==
+SHA1-Digest: Ayex+YrYZZqxaqFPwcYaNX/XqlU=
+
+Name: js/background.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: KxyJhw0+rmRNordv6Rxftg==
+SHA1-Digest: iFKO1r+feQRthj7bE8h3KxI2Ev4=
+
+Name: js/capture.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: gsqbCgDUJShjl0Cn4iZ99g==
+SHA1-Digest: IdSRiQaty6etzBeZAkeDkEkNce8=
+
+Name: js/lightbeam.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 6EwqbcQs/foZUGDtHtNkgQ==
+SHA1-Digest: DZvFvoiUBgfuvx1xdM9rJ9nNnkU=
+
+Name: js/store.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: yopjysQmrAhCgSBOTGZg0w==
+SHA1-Digest: eRGn6VFp96ZcY75mPjNNUtwgQlQ=
+
+Name: js/storeChild.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: rU5iJPjo1zF4o9mSLgHVnA==
+SHA1-Digest: j7n/nNBQ04A4p7Am9ykyu2Ed6co=
+
+Name: js/viz.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: D5B+e0FZurMt6vd4vFvdwg==
+SHA1-Digest: 5hiUpj5Xp/mNhqEC9pCbrDqMVig=
+
