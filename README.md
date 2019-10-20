@@ -5,7 +5,7 @@
 ################xuehui.hu@kcl.ac.uk###############
 
 Here is the tested version of Chrome Lightbeam.
-
+https://chrome.google.com/webstore/detail/lightbeamchrome/hjkajeglckopdkbggdiajobpilgccgnj
 
 Tracking-tool is for analysing the json files downloaded from Firefox version of Lightbeam.
 
