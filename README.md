@@ -2,27 +2,27 @@
 
 
 ################by Rachel Hu################
+
 ################xuehui.hu@kcl.ac.uk###############
 
+Tracking-tool is the PYTHON for analysing the json files downloaded from Firefox version of Lightbeam.
+
+
+
+
+
+
+Installation:
 Here is the tested version of Chrome Lightbeam.
 https://chrome.google.com/webstore/detail/lightbeamchrome/hjkajeglckopdkbggdiajobpilgccgnj
 
-Tracking-tool is for analysing the json files downloaded from Firefox version of Lightbeam.
 
-
-
-
-
-
-
-Open the Chrome
-Turn to chrome://extensions/
-Load the unpacked extension of Lightbeam_Chrome to the webpage
-
+Please share us with your weekly data so that we could improve our add-on:
 
 Click on 
 
-1.the button of 'Save data' can download DB in Json format locally
+1.the button of 'Save data' can download your data in Json format locally
+Once you upload your data through our thumn button, please reset your data to record again:)
          
 2.the second button could give users a database of each request to first-party websites, and it can also show the growth speed of third parties of first parties because it will refresh and save to DB each second.
          
