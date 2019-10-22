@@ -13,8 +13,10 @@ Tracking-tool is the PYTHON for analysing the json files downloaded from Firefox
 
 
 Installation:
-Here is the tested version of Chrome Lightbeam.
+Here is the tested version of Chrome Lightbeam just for research study.
 https://chrome.google.com/webstore/detail/lightbeamchrome/hjkajeglckopdkbggdiajobpilgccgnj
+
+And the original Firefox version is form mozilla: https://github.com/mozilla/lightbeam-we
 
 
 Please share us with your weekly data so that we could improve our add-on:
