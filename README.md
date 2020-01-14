@@ -1,4 +1,4 @@
-# Lightbeam_Chrome
+# Thunderbeam--Lightbeam for Chrome
 
 
 ################by Rachel Hu################
