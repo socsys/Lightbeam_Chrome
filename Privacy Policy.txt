@@ -1,0 +1,34 @@
+Thunderbeam-Lightbeam for Chrome
+Thanks for downloading Thunderbeam!
+
+1. Open the Thunderbeam tab by clicking the Thunderbeam logo in the browser toolbar.
+	 Thunderbeam starts recording connections as soon as it's installed.
+
+2. To start visualizing your online interactions, open a new tab, navigate to a site, and then check back to the Thunderbeam tab.
+	 Thunderbeam is used for our research study, thus your browser data might be used for research. But all data would be hashed and timely deletion for GDPR.
+	 The extension developed from Lightbeam for Firefox (https://github.com/mozilla/lightbeam-we), but it had been stopped.
+
+3. Thunderbeam is under development. If you find a bug that is not already listed as an issue, please report to xuehui.hu@kcl.ac.uk and Give us feedback!
+
+
+
+【HOW WE COOLLECT YOUR DATA】
+Click on
+
+1.the button of 'Save data' and 'Category Count' can download your original and categorical data in Json format locally, and this function will not lead to any kind of data collection:)
+
+2.the second button could give users a database of each request to first-party websites, and it can also show the growth speed of third parties of first parties because it will refresh and save to DB each second.
+
+3.'Reset data' gives users a choice to clear the front-end data. And your weekly data will send to our database with encryption.
+
+4.'Cookie viewer' could give the user the options to view cookies in the current web page, and user could have the choice whether to save ansd send the data to us.:)
+
+
+【HOW WE DEAL WITH DATA】
+
+1. We stored all user data in hashed way to secure all browsing data and impletement timely deletion.
+
+2. All the data collected is only used for our particular research study analysis, which is definitely without any commercial profits.
+
+3. IF the user wishes to delete his/her data in our storage, please send the email to: xuehui.hu@kcl.ac.uk  :)
+
