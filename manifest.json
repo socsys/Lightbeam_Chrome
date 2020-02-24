@@ -1,9 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Lightbeam_Chrome",
-  "version": "1.0.4",
-  "options_page": "options.html",
-  "description": "Chrome Lightbeam is a Chrome browser extension that uses interactive visualizations to show relationships under third parties.",
+  "name": "Thunderbeam-Lightbeam for Chrome",
+  "version": "2.0.9",
+  "description": "Chrome Lightbeam is a Google Chrome extension that uses interactive visualizations to show relationships under third parties.",
 
 
   "icons": {
@@ -18,15 +17,12 @@
     "cookies",
     "storage",
     "downloads",
-    "privacy",
-	"http://*/*",
-	 "*://*.google.com",
-	"https://*/*"
+    "privacy"
   ],
 
   "browser_action": {
     "default_icon": "images/lightbeam-48.png",
-    "default_title": "Chrome Lightbeam",
+    "default_title": "Thunderbeam-Chrome Lightbeam",
 	"default_popup": "index.html"
   },
 
