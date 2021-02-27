@@ -1,3 +1,87 @@
+/* ----------- modal ----------- */
+.modal{
+position: absolute; 
+top: 15%; 
+left: 30%;
+z-index: 10;
+  width: 100%;
+  max-width:  440px;
+  margin: 60px auto;
+  background: white none;
+  border-radius: 8px;
+  box-shadow: 0 12px 16px #d0c6a2;
+  font-size: 14px;
+}
+
+.modal-header,
+.modal-content{
+  padding: 24px;
+}
+
+.modal-header{
+  text-transform: uppercase;
+  border-bottom: 1px solid #f2f0e4;
+  font-size: 15px;
+}
+
+.modal-content{
+  position: relative;
+  box-shadow: 0 8px 6px -6px rgba(0,0,0,.3);
+  z-index: 10;
+}
+
+.modal-content p{
+  margin-top: 0;
+  color: #999;
+}
+
+.modal-footer:before,
+.modal-footer:after{
+  display: table;
+  clear: both;
+  content: " ";
+}
+
+.modal-footer button{
+  position: relative;
+  display: block;
+  float: left;
+  width: 100%;
+  text-align: center;
+  padding: 0px;
+  background: #333 none;
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color .5s, color .5s;
+}
+
+button.modal-cancel{
+  background-color: #f06161;
+  border-radius: 0 0 0 8px;
+  height:42px;
+  cursor:pointer;
+  font-size: 15px;
+}
+
+button.modal-cancel:hover{
+  color: white;
+  background-color: #df4b4b;
+}
+
+button.modal-confirm{
+  background-color: #3bbbb3;
+  border-radius: 0 0 8px 0;
+  height:42px;
+  cursor:pointer;
+  font-size: 15px;
+}
+
+button.modal-confirm:hover{
+  color: white;
+  background-color: #29a69e;
+}
+
 
 /* ----------- VISUALIZATION ----------- */
 
@@ -50,15 +134,19 @@ body {
 
 h1, h2, h3, dt, dd, label {
   margin: 0;
+  text-transform: uppercase;
   font-weight: 400;
 }
 
 h1 {
-  font-size: 1.75em;
+    font-size: 2.0em;
+    width: 400px;
+    font-weight: 600;
+    font-family: monospace;
 }
 
 h2, dt, label {
-  font-size: .75em;
+  font-size: 1em;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -164,7 +252,7 @@ aside h1 {
 }
 
 aside h2 {
-  margin-top: 20px;
+  margin-top: 5px;
   color: var(--primary-text-color);
 }
 
@@ -210,8 +298,9 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--tertiary-color);
-  padding: 20px;
+  /*background-color: var(--tertiary-color);*/
+  background-color: #f6f8f8cc;
+  padding: 10px;
 }
 
 .top-bar > dl {
@@ -232,22 +321,23 @@ main {
 #tracking-protection-disabled > div {
   display: inline-block;
   width: 140px;
-  margin-inline-start: 10px;
+  font-weight: 700;
 }
 
 #tracking-protection-disabled > div > a {
   font-size: 1rem;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .toggle-switch {
   display: inline-flex;
   align-items: center;
   justify-content: space-around;
-  height: 30px;
-  width: 55px;
-  margin-left: 5px;
-  background-color: var(--secondary-color);
+  height: 28px;
+  width: 90px;
+  margin-left: 22px;
+  margin-top: 3px;
+  background-color: #171e25;
   border-radius: 5px;
   position: relative;
   cursor: pointer;
@@ -264,13 +354,13 @@ main {
 
 .toggle:before {
   content: "";
-  height: 24px;
-  width: 25px;
-  background-color: var(--primary-color);
+  height: 22px;
+  width: 22px;
+  background-color: brown;
   border-radius: 5px;
   transition: all 0.4s;
   position: absolute;
-  left: 5px;
+  left: 7px;
   top: 10%;
 }
 
@@ -281,19 +371,19 @@ main {
   text-transform: uppercase;
   color: var(--primary-text-color);
   position: absolute;
-  right: 10%;
+  right: 20%;
   top: 30%;
 }
 
 .toggle-switch input:checked + .toggle:before {
-  transform: translateX(20px);
+  transform: translateX(50px);
   right: 10%;
-  background-color: var(--secondary-text-color);
+  background-color: forestgreen;
 }
 
 .toggle-switch input:checked + .toggle:after {
   content: "ON";
-  left: 10%;
+  left: 20%;
 }
 
 /* ----------- UI - Graph ----------- */
@@ -436,6 +526,13 @@ footer {
   background-image: url('data:image/svg+xml,<svg style="fill: rgb(234, 234, 234)" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon points="0,14 7,2 14,14"></polygon></svg>');
 }
 
+.sync-sites::before {
+	width: 20%;
+	height: 1px;
+	border-top: solid red 3px;
+}
+
+
 .connections::before {
   background-image: url('data:image/svg+xml,<svg version="1.1" xmlns="http://www.w3.org/2000/svg"><line x1="14" y1="2" x2="2" y2="14" style="stroke: rgb(234, 234, 234); stroke-width: 2"></line></svg>');
 }
@@ -493,12 +590,14 @@ footer {
 @media{
   main {
     display: block;
-	height: 800px;
-	width: 1200px;
+	height: 600px;
+	width: 600px;
+	overflow: hidden;
   }
 
   .vis {
     height: 600px;
+	width: 600px;
   }
 
   footer {
