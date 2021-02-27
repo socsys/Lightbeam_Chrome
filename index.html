@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <title>Chrome Lightbeam</title>
-    <meta name="description" content="Chrome Lightbeam is a Chrome add-on that uses interactive visualizations to show you the relationships between third parties and the sites you visit.">
+    <title>Thunderbeam-Lightbeam for Chrome</title>
+    <meta name="description" content="Thunderbeam-Lightbeam for Chrome is a Chrome add-on that uses interactive visualizations to show you the relationships between third parties and the sites you visit.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="images/lightbeam-48.png" type="image/x-icon">
     <link rel="icon" href="images/lightbeam-48.png" type="image/x-icon">
@@ -13,13 +13,12 @@
     <script src="ext-libs/dexie.js"></script>
     <script src="ext-libs/d3.min.js"></script>
     <script src="js/store.js" type="text/javascript"></script>
-  	<!--<script src="js/capture.js" type="text/javascript"></script>
-  	<script src="js/background.js" type="text/javascript"></script> -->
+  	<script src="js/capture.js" type="text/javascript"></script>
     <script src="js/viz.js" type="text/javascript"></script>
     <script src="js/lightbeam.js" type="text/javascript"></script>
 	
 	
-<script src="https://driveuploader.com/upload/ZHPRpinxtl/embed.js"></script>
+
 	
 	
   </head>
@@ -31,26 +30,34 @@
     <nav role="navigation">
       <h2>Visualization</h2>
       <div class="toggle-menu">
-        <!-- @todo add click to toggle view between graph and list, highlighting active view -->
-        <button class="active graph">Graph</button>
-        <button class="list unimplemented">List</button>
+			<button class="visited-sites active" style='font-size:10px;'>First Party Sites</button>
+            <button class="third-party-sites active" style='font-size:10px;'>Third Party Sites</button>
+			<button class="sync-sites active" style='font-size:10px;'>Cookie Syncing</button>
       </div>
+	  
+	  <h2>Auto Data Collect</h2>
+          <div class="toggle-switch">
+            <label for="auto-collection-control">
+              <input type="checkbox" id="auto-collection-control" checked>
+              <span class="toggle" style="cursor: pointer;"></span>
+            </label>
+          </div>
+		  
       <h2>Data</h2>
       <div>
         <!-- @todo add click to save data -->
 
 
 
-        <button class="download" title="Please save your weekly data and kindly upload to support our research :)" id="save-data-button">Save Data</button>
-		<!--<button class="download" title="testing function" id="send-data-button">Check userIP</button> -->
-		<button class="download" title="If you wish to know about the loading speed of TPs or the times you visited the same FP" id="save-data-button1">Access Times/Velocity</button>
-        <button class="download" title="Check the count of your first-/third- party categories" id="hash-button">Category Count</button>
-        <button class="reset" title="Clear your data after having local stored" id="reset-data-button">Reset Data</button>
-		<button class="download" title="View your cookies after the second confirmation" id="cookie-button">Cookies Viewer</button>
-		<!--<button class="reset" title="Expire your current cookies" id="cookie-delete-button">Reset Cookies</button> -->
-		<button class="thumbs-up"  title="Please support us by uploading your weekly data :)" style='font-size:15px; font-weight:bold'><a href="https://driveuploader.com/upload/ZHPRpinxtl/" target="_blank">Upload your Data</a></button>
+        <button class="download" title="Please save your weekly data and kindly upload to support our research :)" id="save-data-button" style='font-size:10px;'>Save Data</button>
 		
-	  <button class="thumbs-up" title="Send your feedback here" style='font-size:15px' id="mailsome-button"><a href="mailto:xuehui.hu@kcl.ac.uk" target="_blank">Email Us</a></button>
+		<button class="download" title="Check the count of your first-/third- party categories" id="hash-button" style='font-size:10px;'>Category Count</button>
+        <button class="reset" title="Clear your data after having local stored" id="reset-data-button" style='font-size:10px;'>Reset Data</button>
+		<button class="thumbs-up" title="Sending your data to our secured database by one click" id="send-data-button"  style='font-size:12px'>Send data <br/>(private & anon)</button>
+		<button class="thumbs-up"  title="Please support us by uploading your weekly data :)" style='font-size:15px; font-weight:bold'><a href="ourlink" target="_blank">Upload to Cloud</a></button>
+		
+	  <button class="thumbs-up" title="Send your feedback here" style='font-size:15px' id="mailsome-button"><a href="mailto:____@email" target="_blank">Contact us</a></button>
+
     </div>
     </nav>
     </aside>
@@ -59,27 +66,19 @@
         <dl class="info-headings">
           <div>
             <h1 id="filter">Website Networks (aimed for Research)</h1>
-			<h2><span id="view">Lightbeam</span> in Chrome</h2>
+			<h2><span id="view">Thunderbeam-LightbeamLightbeam</span> for Chrome</h2>
           </div>
         </dl>
-        <!-- @todo add tracking protection and toggle functionality -->
-        <div class="tracking-protection" id="tracking-protection">
-          <label>Tracking Protection</label>
-          <div class="toggle-switch">
-            <label for="tracking-protection-control">
-              <input type="checkbox" id="tracking-protection-control">
-              <span class="toggle"></span>
-            </label>
-          </div>
-        </div>
-        <div class="tracking-protection" id="tracking-protection-disabled" hidden>
-          <label>Tracking Protection</label>
+        <!-- toggle functionality (remove hidden)-->
+        <div class="tracking-protection" id="tracking-protection-disabled">
+          <label>Here are some papers published: </label>
           <div title="Due to technical issues this doesn't work in current Chrome. Please visit Chrome preferences to enable instead.">
-            Coming back in <a href="https://www.mozilla.org/en-US/firefox/quantum/">Chrome Quantum</a>
+             <a href="ourlink">In our Website</a>
           </div>
         </div>
         </div>
       </section>
+
 	  
       <section class="vis">
         <div class="unimplemented vis-header max-graph">
@@ -90,7 +89,7 @@
           <!-- @todo display list or graph view, update view based on filter and controls -->
           <!-- @todo remove the hard-coded width, height values -->
         </div>
-        <div class="vis-controls info-panel-controls implemented">
+        <div class="vis-controls info-panel-controls unimplemented">
           <!-- @todo check purpose of website icon -->
           <button class="info-panel website"></button>
           <!-- @todo add help sidebar -->
@@ -102,36 +101,21 @@
           <div id="tooltip"></div>
         </div>
       </section>
-      <footer class="unimplemented">
-        <div class="footer-toggle unimplemented">
-          <div class="footer-heading">
-            <h2>Toggle Controls</h2>
-          </div>
-          <!-- @todo highlight active controls, add click to toggle controls -->
-          <div class="footer-toggle-buttons controls">
-            <button class="visited-sites active">Visited Sites</button>
-            <button class="watched-sites two-icons active">Watched Sites</button>
-            <button class="cookies active">Cookies</button>
-            <button class="third-party-sites active">Third Party Sites</button>
-            <button class="blocked-sites two-icons active">Blocked Sites</button>
-            <button class="connections active">Connections</button>
-          </div>
-        </div>
-        <div class="footer-filter unimplemented">
-          <div class="footer-heading">
-            <h2>Filter</h2>
-            <!-- @todo add click for hide to toggle filter menu-->
-            <h2 class="hide">Hide</h2>
-          </div>
-          <div class="filter-menu">
-          <!-- @todo highlight active filter, add click to toggle filter -->
-            <button class="active">Recent Site</button>
-            <button>Last 10 Sites</button>
-            <button>Daily</button>
-            <button>Weekly</button>
-          </div>
-        </div>
-      </footer>
+	  
+	<div class="modal" style="display:none;">
+		<div class="modal-header">
+		  Consent of User Data Collection
+		</div>
+		<div class="modal-content">
+		  <p>This extension is developed as part of a large study of web tracking. We wish to collect your data anonymously to help understand tracking around the world. If you agree, please press OK below. If you press NO, then your data will NOT be collected, but you will still be able to use our extension. You can change your mind at any time by simply changing the auto data collect setting on the left.</p>
+		</div>
+		<div class="modal-footer">
+		  
+		  <button class="modal-confirm">OK, collect data anonymously for research. </button>
+		  <button class="modal-cancel">No, please do not use my data</button>
+		</div>
+	  </div>
+
     </main>
   </body>
 </html>
