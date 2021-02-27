@@ -1,3 +1,50 @@
+function arrayCombine(targetArr = [], count = 1) {
+  if (!Array.isArray(targetArr)) return []
+
+  const resultArrs = []
+  const flagArrs = getFlagArrs(targetArr.length, count)
+  while (flagArrs.length) {
+    const flagArr = flagArrs.shift()
+    resultArrs.push(targetArr.filter((_, idx) => flagArr[idx]))
+  }
+  return resultArrs
+}
+
+function getFlagArrs(m, n = 1) {
+  if (n < 1 || m < n)  return []
+
+  let str = '1'.repeat(n) + '0'.repeat(m-n)
+  let pos
+  const resultArrs = [Array.from(str, x => Number(x))]
+  const keyStr = '10'
+
+  while(str.indexOf(keyStr) > -1) {
+    pos = str.indexOf(keyStr)
+    // 2
+    str = str.replace(keyStr, '01')
+    // 3
+    str = Array.from(str.slice(0, pos))
+      .sort((a, b) => b-a)
+      .join('') + str.slice(pos)
+    // 4
+    resultArrs.push(Array.from(str, x => Number(x)))
+  }
+  return resultArrs
+}
+
+
+var xhrcname = new XMLHttpRequest(); 
+xhrcname.open("GET","./AllSubdomains.txt",false); 
+xhrcname.send(); 
+var CnameCloak=(xhrcname.responseText); 
+var CnameCloak=CnameCloak.split(',');
+
+function arrSlice (arr) {
+	  return arr
+		.sort(() => Math.random() > .5) 
+		.map((e, i) => i % 2 ? null : arr.slice(i,i+2))
+		.filter(Boolean)
+	}
 // eslint-disable-next-line no-unused-vars
 const viz = {
   scalingFactor: 2,
@@ -9,6 +56,7 @@ const viz = {
   chargeStrength: -100,
   tickCount: 100,
   canvasColor: 'white',
+  alphaStart: 1,
   alphaTargetStart: 0.1,
   alphaTargetStop: 0,
 
@@ -129,6 +177,9 @@ const viz = {
     this.context.save();
     this.context.translate(this.transform.x, this.transform.y);
     this.context.scale(this.transform.k, this.transform.k);
+	//this.drawCookieAsync();
+	this.drawCookieAsync_simple();
+	this.dynamic();
     this.drawLinks();
     this.drawNodes();
     this.context.restore();
@@ -156,22 +207,29 @@ const viz = {
 
       if (node.firstParty) {
         radius = this.getRadius(node.thirdParties.length);
-        this.drawFirstParty(x, y, radius);
+        this.drawFirstParty(x, y, radius*0.7);
       } else {
         this.drawThirdParty(x, y);
       }
 
       if (node.shadow) {
-        this.drawShadow(x, y, radius);
+        this.drawShadow(x, y, radius*0.7);
       }
-
-      this.context.fillStyle = this.canvasColor;
-      this.context.closePath();
-      this.context.fill();
+		if (CnameCloak.indexOf(node.hostname)!=-1){
+			this.context.fillStyle ='red';
+			
+		}
+		else{
+		  this.context.fillStyle = this.canvasColor;
+		  
+		}
+			this.context.closePath();
+			this.context.fill();
 
       if (node.favicon) {
         this.drawFavicon(node, x, y);
       }
+	  
     }
   },
 
@@ -233,7 +291,7 @@ const viz = {
 
   drawShadow(x, y, radius) {
     const lineWidth = 2,
-      shadowBlur = 15,
+      shadowBlur = 10,
       shadowRadius = 5;
     this.context.beginPath();
     this.context.lineWidth = lineWidth;
@@ -306,10 +364,157 @@ const viz = {
       this.context.lineTo(tx, ty);
     }
     this.context.closePath();
+	this.context.lineWidth = 1;
     this.context.strokeStyle = '#ccc';
     this.context.stroke();
   },
+  
+  dynamic(){
+	  this.context.beginPath();
+    for (const d of this.links) {
+		if (String(d.source.info)!='undefined' && String(d.target.info)!='undefined'){
+				var intersection = d.source.info.filter(v => d.target.info.includes(v))
+				if (intersection.length>0){
+					//console.log(intersection,d.source.hostname,d.target.hostname);
+					const sx = d.source.fx || d.source.x;
+					const sy = d.source.fy || d.source.y;
+					const tx = d.target.fx || d.target.x;
+					const ty = d.target.fy || d.target.y;
+					this.context.moveTo(sx, sy);
+					this.context.lineTo(tx, ty);
+				}
+		}
+    }
+    this.context.closePath();
+	this.context.lineWidth = 2;
+    this.context.strokeStyle = 'red';
+    this.context.stroke();
+  },
+    drawCookieAsync_simple(){
+	this.context.beginPath();
+	nodesarr=this.nodes;
+    for (var e in nodesarr) {
+		next=parseInt(e)+1;
+		if (String(nodesarr[e])!='undefined' && String(nodesarr[next])!='undefined'){
+			if (String(nodesarr[e].info)!='undefined' && String(nodesarr[next].info)!='undefined'){
+			if (nodesarr[e].info.length>1 && nodesarr[next].info.length>1 ){
+				var intersection = nodesarr[e].info.filter(v => nodesarr[next].info.includes(v))
+				if (intersection.length>0){
+					//console.log(intersection,nodesarr[e].hostname,nodesarr[next].hostname);
+					const sx = nodesarr[e].fx || nodesarr[e].x;
+					const sy = nodesarr[e].fy || nodesarr[e].y;
+					const tx = nodesarr[next].fx || nodesarr[next].x;
+					const ty = nodesarr[next].fy || nodesarr[next].y;
+					this.context.moveTo(sx, sy);
+					this.context.lineTo(tx, ty);
+				}
+				}
+		}
+		}
+    }
+    this.context.closePath();
+	this.context.lineWidth = 1;
+    this.context.strokeStyle = 'red';
+    this.context.stroke();
+  },
 
+  drawCookieAsync(){
+	this.context.beginPath();
+	nodesarr=this.nodes;
+	
+	
+	var nodesarr=nodesarr.filter((d)=>{
+		if (String(d)!='undefined'&&(String(d.info)!='undefined'||d.cookies.length>0)&&d.firstParty==false){
+			return d
+			}
+	});
+	
+	function duplicates(arr) {
+    var newarr = [];
+    for(var j = 0;j < arr.length;j++){
+        for(var i = j+1;i < arr.length;i++){
+            if(arr[j] == arr[i]){
+                newarr.push(arr[i]);
+                
+            }
+        }
+    } 
+    return Array.from(new Set(newarr));
+	}
+	var info_arr = [];
+	var cookie_arr = [];
+
+	nodesarr.forEach((node) => {
+			info_arr.push(node.info);
+			cookie_arr.push(Array.from(new Set(node.cookies.map(items=>items.value))))
+		  });
+
+	info_async=duplicates(info_arr.flat(2));
+	info_async = info_async.filter(Boolean)
+	info_async=info_async.filter(each=>(!each.startsWith('domain')) && (!each.startsWith('referer')) && (!each.startsWith('source')) && (!each.startsWith('https')) && (!each.startsWith('www.')) && (!each.startsWith('gdpr')) && (!each.startsWith('gu='))&& (!each.startsWith('r='))&& (!each.startsWith('t=')) && (!each.startsWith('lp=')))//check parameter
+	info_async.forEach((a) => {
+		var positions=[];
+		if (String(a)!='undefined'){
+			for(var i in info_arr){
+				if(String(info_arr[i])!='undefined'){
+					if(info_arr[i].indexOf(a)!=-1){
+						positions.push(nodesarr[i])
+					}
+				}
+			}
+		}
+			//console.log(positions,a)//each asynced value and matched nodes positions array for each value
+			nodes_pairs=arrayCombine(positions,2)
+			for (var e in nodes_pairs) {
+				firstnode = nodes_pairs[e][0];
+				nextnode = nodes_pairs[e][1];
+					const sx = firstnode.fx || firstnode.x;
+					const sy = firstnode.fy || firstnode.y;
+					const tx = nextnode.fx || nextnode.x;
+					const ty = nextnode.fy || nextnode.y;
+					this.context.moveTo(sx, sy);
+					this.context.lineTo(tx, ty);
+			}
+		  });
+		  
+	var num_reg=/^[\,\.\~\-\d]+$/;
+	cookie_async=duplicates(cookie_arr.flat(2));
+	cookie_async=cookie_async.filter(each=>each.length>8 && (!num_reg.test(each)) &&(!each.startsWith('http'))&&(!each.startsWith('www.')))//asynced cookie len>8 && cannot be all numeric
+	
+	cookie_async.forEach((a) => {
+		var positions=[]
+			for(var i in cookie_arr){
+				if(cookie_arr[i].length>0){
+					if(cookie_arr[i].indexOf(a)!=-1){
+						positions.push(nodesarr[i])
+						
+					}
+				}
+			}
+			//console.log(positions,a)
+			nodes_pairs=arrayCombine(positions,2)
+			for (var e in nodes_pairs) {
+				firstnode = nodes_pairs[e][0];
+				nextnode = nodes_pairs[e][1];
+				//console.log(a,firstnode.hostname,nextnode.hostname);
+				const sx = firstnode.fx || firstnode.x;
+				const sy = firstnode.fy || firstnode.y;
+				const tx = nextnode.fx || nextnode.x;
+				const ty = nextnode.fy || nextnode.y;
+				this.context.moveTo(sx, sy);
+				this.context.lineTo(tx, ty);
+			}
+		  });
+	
+	
+	
+	
+    this.context.closePath();
+	this.context.lineWidth = 1;
+    this.context.strokeStyle = 'red';
+    this.context.stroke();
+  },
+  
   isPointInsideCircle(x, y, cx, cy) {
     const dx = Math.abs(x - cx);
     const dy = Math.abs(y - cy);
