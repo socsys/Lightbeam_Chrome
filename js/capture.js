@@ -1,7 +1,102 @@
-/*
-* Listens for HTTP request responses, sending first- and
-* third-party requests to storage.
-*/
+function parseUri (str) {
+	var	o   = parseUri.options,
+		m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
+		uri = {},
+		i   = 14;
+
+	while (i--) uri[o.key[i]] = m[i] || "";
+
+	uri[o.q.name] = {};
+	uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
+		if ($1) uri[o.q.name][$1] = $2;
+	});
+
+	return uri;
+};
+
+parseUri.options = {
+	strictMode: false,
+	key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
+	q:   {
+		name:   "queryKey",
+		parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+	},
+	parser: {
+		strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+		loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+	}
+};
+
+function unique(arr) {
+    if (!Array.isArray(arr)) {
+        return;
+    }
+    arr = arr.sort()
+    var arrry= [arr[0]];
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] !== arr[i-1]) {
+            arrry.push(arr[i]);
+        }
+    }
+    return arrry;
+}
+
+
+function ExtractParam(url){
+  if (url.indexOf("?") != -1) {
+	var url = url.split("?")[1];
+	Paras=url.split('&').map(item=>decodeURIComponent(item));
+	return Paras;
+  }
+  else{
+  Paras=url.split('&').map(item=>decodeURIComponent(item));
+	  if (Paras.length>1){
+		return Paras;
+	  }
+  }
+}
+
+function AllCookiesInTab(CurrentUrl){
+	chrome.tabs.executeScript({
+	  code: 'performance.getEntriesByType("resource").map(e => e.name)',
+	}, data => {
+	  if (chrome.runtime.lastError || !data || !data[0]) return;
+	  var urls = data[0].map(url => url.split(/[#?]/)[0]);
+	  var uniqueUrls = [...new Set(urls).values()].filter(Boolean);
+	  Promise.all(
+		uniqueUrls.map(url =>
+		  new Promise(resolve => {
+			chrome.cookies.getAll({url}, resolve);
+		  })
+		)
+	  ).then(results => {
+		var cookies = [
+		  ...new Map(
+			[].concat(...results)
+			  .map(c => [JSON.stringify(c), c])
+		  ).values()
+		];
+
+		
+
+	var NeedStore_CookiesInTab = {};
+	NeedStore_CookiesInTab["hostname"] = tldurl(CurrentUrl);
+	NeedStore_CookiesInTab["CookiesInTab"] = cookies;
+	NeedStore_CookiesInTab["uThirdParties"] = unique(cookies.map((x) => { 
+			if (tldurl((Object.values(Object(x).valueOf('domain'))[0])).split(".")[0] != tldurl(CurrentUrl).split(".")[0]){
+				return tldurl((Object.values(Object(x).valueOf('domain'))[0]))
+				}
+			else
+			{
+				return ;
+			}
+			})).filter(Boolean);
+			
+	store._writeSecond(NeedStore_CookiesInTab,CurrentUrl);  
+	
+	  });
+	});
+}
 var table = [];
 const capture = {
 
@@ -9,43 +104,59 @@ const capture = {
     this.addListeners();
   },
 
+  
+  
   addListeners() {
-    // listen for each HTTP response
     this.queue = [];
     chrome.webRequest.onResponseStarted.addListener((response) => {
-      const eventDetails = {
-        type: 'sendThirdParty',
-        data: response
-      };
-      console.log("response",response);
-      this.queue.push(eventDetails);
-      this.processNextEvent();
+		documentUrl = new URL(response.initiator);
+		if ((documentUrl.protocol != 'about:')
+		  && (documentUrl.protocol != 'chrome:')
+	      && (documentUrl.protocol != 'chrome-extension:')
+		  && (documentUrl.protocol != 'chrome-search:')) {
+
+		//console.log(response.initiator);
+		  const eventDetails = {
+			type: 'sendThirdParty',
+			data: response
+		  };
+		  //console.log("response",response);
+		  this.queue.push(eventDetails);
+		  this.processNextEvent();
+		  }
     },
       {urls: ['<all_urls>']});
-    // listen for tab updates
+	
     chrome.tabs.onUpdated.addListener(
+
       (tabId, changeInfo, tab) => {
-        const eventDetails = {
-          type: 'sendFirstParty',
-          data: {
-            tabId,
-            changeInfo,
-            tab
-          }
-        };
-        chrome.tabs.get(tabId, function(tab) {table[tabId] = tab;console.log("afs",table);});
-		console.log("afs",table);
-        this.queue.push(eventDetails);
-        this.processNextEvent();
+		  if (changeInfo.status == "complete"){
+			  AllCookiesInTab(tab.url);
+		  }
+		  
+		documentUrl = new URL(tab.url);
+		if ((documentUrl.protocol != 'about:')
+		  && (documentUrl.protocol != 'chrome:')
+	      && (documentUrl.protocol != 'chrome-extension:')
+		  && (documentUrl.protocol != 'chrome-search:')) {
+
+			const eventDetails = {
+			  type: 'sendFirstParty',
+			  data: {
+				tabId,
+				changeInfo,
+				tab
+			  }
+			};
+
+			chrome.tabs.get(tabId, function(tab) {table[tabId] = tab;});
+			
+			this.queue.push(eventDetails);
+			this.processNextEvent();
+			}
       });
   },
 
-  // Process each HTTP request or tab page load in order,
-  // so that async reads/writes to IndexedDB
-  // (via sendFirstParty and sendThirdParty) won't miss data
-  // The 'ignore' boolean ensures processNextEvent is only
-  // executed when the previous call to processNextEvent
-  // has completed.
   async processNextEvent(ignore = false) {
     if (this.processingQueue && !ignore) {
       return;
@@ -71,7 +182,6 @@ const capture = {
             );
         }
       } catch (e) {
-        // eslint-disable-next-line no-console
         console.warn('Exception found in queue process', e);
       }
       this.processNextEvent(true);
@@ -79,18 +189,13 @@ const capture = {
       this.processingQueue = false;
     }
   },
-
-  // Returns true if the request should be stored, otherwise false.
-  // info could be a tab (from setFirstParty) or a
-  // response (from setThirdParty) object
   async shouldStore(info) {
+	  
+	  
     return true;
     const tabId = info.id || info.tabId;
     let documentUrl, privateBrowsing;
-    // Ignore container tabs as we need to store them correctly
-    //  showing a simpler graph just for default means we won't confuse users
-    //  into thinking isolation has broken
-    const defaultCookieStore = 'firefox-default';
+    const defaultCookieStore = 'chrome-default';
     if ('cookieStoreId' in info
         && info.cookieStoreId !== defaultCookieStore) {
       return false;
@@ -108,22 +213,16 @@ const capture = {
       documentUrl = new URL(tab.url);
       privateBrowsing = tab.incognito;
     } else {
-      // if we were not able to check the cookie store
-      // lets drop this for paranoia sake.
       if (!('cookieStoreId' in info)) {
         return false;
       }
-      // chrome.tabs.get throws an error for nonvisible tabs (tabId = -1)
-      // but some non-visible tabs can make third party requests,
-      // ex: Service Workers
       documentUrl = new URL(info.originUrl);
       privateBrowsing = false;
     }
 
-    // ignore about:*, moz-extension:*
-    // also ignore private browsing tabs
     if (documentUrl.protocol !== 'about:'
       && documentUrl.protocol !== 'chrome:'
+      && documentUrl.protocol !== 'chrome-search:'
       && !privateBrowsing) {
       return true;
     }
@@ -139,7 +238,6 @@ const capture = {
     try {
       tab = await chrome.tabs.get(tabId);
     } catch (e) {
-      // Lets ignore tabs we can't get hold of (likely have closed)
       return;
     }
     return tab;
@@ -152,22 +250,12 @@ const capture = {
       // first party site
       return;
     }
-
-    // @todo figure out why Web Extensions sometimes gives
-    // undefined for response.originUrl
-    //const originUrl = response.originUrl ? new URL(response.originUrl) : '';
-    //const targetUrl = new URL(response.url);
     const originUrl = table[response.tabId].url ? new URL(table[response.tabId].url) : '';
-    console.log("originUrl",originUrl);
     const targetUrl = new URL(response.url);
     let firstPartyUrl;
     if (this.isVisibleTab(response.tabId)) {
-      //const tab = await this.getTab(response.tabId);
       const tab = table[response.tabId];
-      console.log("tabId",response.tabId);
-      console.log("tab?",tab.url);
       if (!tab) {
-        console.log("tab 0");
         return;
       }
       firstPartyUrl = new URL(tab.url);
@@ -180,11 +268,14 @@ const capture = {
       && targetUrl.hostname !== firstPartyUrl.hostname
       && await this.shouldStore(response)) {
       const data = {
+        info:ExtractParam(response.url),
         target: targetUrl.hostname,
         origin: originUrl.hostname,
         requestTime: response.timeStamp,
         firstParty: false
       };
+
+	 //console.log(parseUri(response.url).query.split('&').map(item=>decodeURIComponent(item)),ExtractParam(response.url));
       await store.setThirdParty(
         firstPartyUrl.hostname,
         targetUrl.hostname,
@@ -199,7 +290,7 @@ const capture = {
     if (documentUrl.hostname
         && tab.status === 'complete' && await this.shouldStore(tab)) {
       const data = {
-        faviconUrl: tab.favIconUrl,
+        //faviconUrl: tab.favIconUrl,
         firstParty: true,
         requestTime: Date.now()
       };
