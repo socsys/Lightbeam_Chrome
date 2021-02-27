@@ -16,20 +16,21 @@ Installation:
 Here is the tested version of Chrome Lightbeam just for research study.
 https://chrome.google.com/webstore/detail/lightbeamchrome/hjkajeglckopdkbggdiajobpilgccgnj
 
-And the original Firefox version is form mozilla: https://github.com/mozilla/lightbeam-we
 
 
-Please share us with your weekly data so that we could improve our add-on:
+Thunderbeam-Lightbeam for Chrome uses interactive visualizations to show users the relationship under third parties.
 
-Click on 
+- Thunderbeam starts recording connections as soon as it's installed.
 
-1.the button of 'Save data' can download your data in Json format locally
-Once you upload your data through our thumn button, please reset your data to record again:)
-         
-2.the second button could give users a database of each request to first-party websites, and it can also show the growth speed of third parties of first parties because it will refresh and save to DB each second.
-         
-3.'Reset data' gives users a choice to clear the front-end data, but it will also send us with the encrypted back-up. If you wish to cancel that, please email us with the withdrawl.
+- To start visualizing your online interactions, open a new tab, navigate to a site, and then check back to the Thunderbeam tab.
 
-4.'Category Count' could save the json file that provided users with the number of each category (both first-party and third-party websites), and the total number of users first-party websites and third-parties websites.
+- Thunderbeam is used for our research study. If you consent, and only if you consent, your browser data will be used for research. Please note that even for those who consent, no personal data belonging to the users will be used (and data is hashed to prevent re-identification); any data collected will be used only for the purposes of non-commercial research, and all data will be deleted after the research project completes.
+
+
+Acknowledgements:
+- Our sincere thanks to the original version of thunderbeam, which is from Firefox (no longer supported, as of October,2019): https://support.mozilla.org/en-US/kb/lightbeam-extension-firefox-no-longer-supported
+
+- Our thanks also to any users who choose to support us by sharing their data. Your work is contributing to our research. Here are some papers published by our study:
+https://nms.kcl.ac.uk/netsys/datasets/tracking-the-trackers-papers/
 
 
