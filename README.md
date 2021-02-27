@@ -1,9 +1,7 @@
 # Thunderbeam--Lightbeam for Chrome
 
 
-################by Rachel Hu################
-
-################xuehui.hu@kcl.ac.uk###############
+--------------------by Rachel Hu (xuehui.hu@kcl.ac.uk)
 
 Tracking-tool is the PYTHON for analysing the json files downloaded from Firefox version of Lightbeam.
 
