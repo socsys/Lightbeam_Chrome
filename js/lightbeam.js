@@ -207,12 +207,7 @@ const lightbeam = {
 			localStorage['consent-notice-user']=true;
 			document.getElementById('auto-collection-control').checked=true;
 			 localStorage['auto-collection-control']=true;
-			//not turn to research ethics page again
-				/*var n=confirm("Pressing OK to confirm you above 16 years old before sending the data.");
-				if(n==true){
-				  var x=prompt("If you want to know the criteria for the consent process reviewed by the Research Ethics Committee of King's College London","https://www.kcl.ac.uk/research/support/rgei/research-ethics/guidelines-for-external-researchers");
-				  window.open("https://www.kcl.ac.uk/research/support/rgei/research-ethics/guidelines-for-external-researchers","_blank","top=50,left=80,width=400,height=500,scrollbar=yes,statusbar=no,menubar=no,toolbar=no"); 
-				}*/
+	
 			alert("Thank you for your support !")
 		  }
 		else {
